@@ -1,9 +1,10 @@
-# NHL (235)
+# 235 (NHL)
+
+Application displays NHL scores with emphases on players of your chosen country.
 
 ## Init
 
 - `npm install` - Install packages
-- `npx expo init {app_name}` - This should be done in some other folder, to troubleshoot whats wrong
 
 ## Start
 
@@ -13,13 +14,17 @@
 
 ## Build to store (Testflight)
 
-1. `eas build -p ios/android`
-2. goto url displayed in terminal (https://expo.dev/accounts/ljomoila/projects)
-3. when .ipa done download it
-4. upload .ipa to Transporter
-5. goto App Store -> https://appstoreconnect.apple.com/apps/1554665833/testflight
-6. when loading done, install via Testflight iOS app
+1. `eas build -p ios/android` - Starts expo build/deployment process
+2. Go to url displayed in terminal (https://expo.dev/accounts/ljomoila/projects)
+3. When .ipa done download it.
+4. Upload .ipa to Transporter.
+5. Go to App Store -> https://appstoreconnect.apple.com/apps/1554665833/testflight
+6. When loading done, install via Testflight iOS app.
 
 ## Update teams on file
 
 `npm run update`
+
+## Troubleshoot
+
+- `npx expo init {app_name}` - This should be done out side of the project to troubleshoot whats wrong.

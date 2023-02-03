@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, RefreshControl, ActivityIndicator, AppState } from 'react-native';
-import { styles } from '../App';
+import { AppState } from 'react-native';
 
 export default class ViewBase extends Component {
   constructor(props) {
@@ -34,21 +33,6 @@ export default class ViewBase extends Component {
   };
 
   render() {
-    return (
-      <>
-        {this.state.loading ? (
-          <ActivityIndicator size="large" style={styles.loading} />
-        ) : (
-          <ScrollView
-            style={{ flex: 1 }}
-            refreshControl={
-              <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
-            }
-          >
-            {this._render()}
-          </ScrollView>
-        )}
-      </>
-    );
+    return <>{this._render()}</>;
   }
 }

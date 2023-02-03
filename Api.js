@@ -1,6 +1,6 @@
 const NHL_API_BASE_URL = 'https://statsapi.web.nhl.com/api/v1';
 
-class Api {
+export default class Api {
   async doFetch(url) {
     try {
       const response = await fetch(NHL_API_BASE_URL + url);
@@ -37,12 +37,18 @@ class Api {
 
   async getScheduleByDate(date) {
     const response = await this.doFetch(`/schedule?date=${date}`);
-    return response.dates.length > 0 ? response.dates[0].games : [];
+
+    return response.dates.length ? response.dates[0].games : [];
   }
 
   async getLiveFeed(gamePk) {
     return await this.doFetch(`/game/${gamePk}/feed/live`);
   }
-}
 
-module.exports = Api;
+  async getPlayerStats(playerId, statType) {
+    const response = await this.doFetch(`/people/${playerId}/stats?stats=${statType}`);
+    if (response.stats.length) return response.stats[0].splits;
+
+    return [];
+  }
+}

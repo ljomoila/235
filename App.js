@@ -24,7 +24,6 @@ class App extends Component {
     players,
     loading: false
   };
-  fontFamily = 'Teletext';
 
   constructor(props) {
     super(props);
@@ -61,7 +60,7 @@ class App extends Component {
 
   renderActiveView() {
     const { activeView, players, teams } = this.state;
-    const commonProps = { api: this.api, teams, players };
+    const commonProps = { api: this.api, teams, players, setActiveView: this.setActiveView };
 
     switch (activeView) {
       case VIEW.LAST_NIGHTS_SCORES: {
@@ -97,7 +96,7 @@ class App extends Component {
   }
 }
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     paddingTop: 35,
     paddingBottom: 10,
