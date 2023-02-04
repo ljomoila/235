@@ -2,7 +2,7 @@
   "expo": {
     "name": "nhl",
     "slug": "235",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -17,7 +17,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.ljomoila.235",
-      "buildNumber": "0.0.4"
+      "buildNumber": "0.0.5"
     },
     "android": {
       "adaptiveIcon": {

@@ -1,18 +1,15 @@
-import { useState } from 'react';
-import { Text } from 'react-native';
-import { textBaseStyle } from '../App';
+import { colors } from '../styles';
+import { TeleText } from './TeleText';
 
-export const ScorePlayer = ({ player, stats, styles, playerPressed }) => {
-  const baseStyles = {
-    ...textBaseStyle,
-    ...styles,
-    fontSize: 12,
-    marginBottom: 5
-  };
+const ScorePlayer = ({ stats, styles, onPress }) => {
+  const { player, goals, assists } = stats;
+  styles.color = player.nationality === 'FIN' ? colors.green : colors.blue;
 
   return (
-    <Text style={{ ...styles }} onPress={() => playerPressed(player)}>
-      {player.displayName} {stats}
-    </Text>
+    <TeleText style={styles} onPress={() => onPress(player)}>
+      {player.displayName} {`${goals}+${assists}`}
+    </TeleText>
   );
 };
+
+export default ScorePlayer;

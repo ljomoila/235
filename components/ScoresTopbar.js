@@ -1,5 +1,6 @@
-import React, { Component, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Button, Modal } from 'react-native';
+import React, { useContext } from 'react';
+import { AppContext } from '../context/App/AppContext';
+import { Topbar } from './Topbar';
 
 export const getDateStr = (index) => {
   let date = new Date();
@@ -12,39 +13,19 @@ const formatDate = (date) => {
   return date.toISOString().split('T')[0];
 };
 
-const formReadableDate = (date) => {
-  return date;
-};
-
-const isToday = (date) => {
-  return new Date().toDateString() == date.toDateString();
-};
-
-export const ScoresTopbar = ({ currentDateIndex, setDate }) => {
-  const [dateIndex, setDateIndex] = useState(currentDateIndex);
+export const ScoresTopbar = () => {
+  const { appState, dispatch } = useContext(AppContext);
 
   const onButtonPress = (i) => {
-    const newIndex = dateIndex + i;
-    setDateIndex(newIndex);
-    setDate(newIndex);
+    const newDateIndex = appState.dateIndex + i;
+    dispatch({ ...appState, dateIndex: newDateIndex, updateScores: true });
   };
 
   return (
-    <View
-      style={{
-        display: 'flex',
-        position: 'absolute',
-        width: '100%',
-        zIndex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: 5
-      }}
-    >
-      <Button title="Back" onPress={() => onButtonPress(-1)} />
-      <Text style={{ color: 'white' }}>{getDateStr(dateIndex)}</Text>
-      <Button title="Forward" onPress={() => onButtonPress(1)} />
-    </View>
+    <Topbar
+      title={getDateStr(appState.dateIndex)}
+      left={{ title: 'Back', onPress: () => onButtonPress(-1) }}
+      right={{ title: 'Forward', onPress: () => onButtonPress(1) }}
+    />
   );
 };

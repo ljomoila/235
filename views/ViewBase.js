@@ -9,18 +9,18 @@ export default class ViewBase extends Component {
     this.state = { loading: true, refreshing: false, appState: AppState.currentState };
   }
 
-  componentDidMount() {
-    this.appStateSubscription = AppState.addEventListener('change', (nextAppState) => {
-      if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
-        this.onRefresh();
-      }
-      this.setState({ appState: nextAppState });
-    });
-  }
+  // componentDidMount() {
+  //   this.appStateSubscription = AppState.addEventListener('change', (nextAppState) => {
+  //     if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+  //       this.onRefresh();
+  //     }
+  //     this.setState({ appState: nextAppState });
+  //   });
+  // }
 
-  componentWillUnmount() {
-    if (this.appStateSubscription) this.appStateSubscription.remove();
-  }
+  // componentWillUnmount() {
+  //   if (this.appStateSubscription) this.appStateSubscription.remove();
+  // }
 
   onRefresh = () => {
     if (!this.loadData) return;

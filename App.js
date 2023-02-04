@@ -1,114 +1,52 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, StatusBar, ActivityIndicator } from 'react-native';
-import useFont from './FontLoader';
-import LastNightsScores from './views/LastNightsScores';
-import teams from './assets/data/teams.json';
-import players from './assets/data/players.json';
-import Api from './Api';
+import React, { useContext } from 'react';
+import { View, StatusBar, ActivityIndicator, SafeAreaView } from 'react-native';
+import { useSetupApp } from './hooks/useSetupApp';
+import { AppContext, Views } from './context/App/AppContext';
+import { styles } from './styles';
+import Scores from './views/Scores';
+import AppContextProvider from './context/App/AppContextProvider';
+import ScoreContextProvider from './context/Score/ScoreContextProvider';
 
-const VIEW = {
-  LAST_NIGHTS_SCORES: 0,
-  TEAM: 1,
-  PLAYER: 2
-};
+const App = () => {
+  useSetupApp();
+  const { appState } = useContext(AppContext);
 
-export const textBaseStyle = {
-  fontFamily: 'Teletext',
-  color: '#ffffff'
-};
-
-class App extends Component {
-  state = {
-    activeView: VIEW.LAST_NIGHTS_SCORES,
-    teams,
-    players,
-    loading: false
+  const getActiveView = () => {
+    switch (appState.activeView) {
+      case Views.SCORES:
+        return (
+          <ScoreContextProvider>
+            <Scores />
+          </ScoreContextProvider>
+        );
+      case Views.STANDINGS:
+        return null;
+      default:
+        return null;
+    }
   };
 
-  constructor(props) {
-    super(props);
+  return (
+    <SafeAreaView style={styles.container}>
+      <StatusBar
+        animated={true}
+        backgroundColor="#000"
+        barStyle="dark-content"
+        showHideTransition="fade"
+        hidden={false}
+      />
 
-    this.api = new Api();
-  }
+      <View>{appState.loading ? <ActivityIndicator /> : getActiveView()}</View>
+    </SafeAreaView>
+  );
+};
 
-  async componentDidMount() {
-    this.teams = await this.api.getTeams();
-    this.players = await this.getPlayers();
-  }
+const Wrapper = () => {
+  return (
+    <AppContextProvider>
+      <App />
+    </AppContextProvider>
+  );
+};
 
-  async getPlayers() {
-    let players = [];
-
-    await Promise.all(
-      this.teams.map(async ({ id }) => {
-        const r = await this.api.getRoster(id);
-        await Promise.all(
-          r.map(async ({ person }) => {
-            const player = await this.api.getPlayer(person.id);
-            players.push(player);
-          })
-        );
-      })
-    );
-
-    return players;
-  }
-
-  setActiveView(view) {
-    this.setState({ activeView: view });
-  }
-
-  renderActiveView() {
-    const { activeView, players, teams } = this.state;
-    const commonProps = { api: this.api, teams, players, setActiveView: this.setActiveView };
-
-    switch (activeView) {
-      case VIEW.LAST_NIGHTS_SCORES: {
-        return <LastNightsScores {...commonProps} />;
-      }
-      case VIEW.TEAM: {
-        // TODO
-        return null;
-      }
-      case VIEW.PLAYER: {
-        // TODO
-        return null;
-      }
-      default: {
-        throw new Error('Unknown view');
-      }
-    }
-  }
-
-  render() {
-    return (
-      <>
-        <StatusBar style="light" />
-        <View style={styles.container}>
-          {this.state.loading ? (
-            <ActivityIndicator size="large" style={styles.loading} />
-          ) : (
-            this.renderActiveView()
-          )}
-        </View>
-      </>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 35,
-    paddingBottom: 10,
-    height: '100%',
-    width: '100%',
-    margin: 'auto',
-    backgroundColor: 'black'
-  },
-  loading: {
-    margin: 'auto',
-    paddingTop: 10
-  }
-});
-
-export default useFont(App);
+export default Wrapper;

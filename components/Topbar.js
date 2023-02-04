@@ -5,9 +5,7 @@ export const Topbar = ({ left, title, right }) => {
     <View
       style={{
         display: 'flex',
-        position: 'absolute',
         width: '100%',
-        zIndex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
