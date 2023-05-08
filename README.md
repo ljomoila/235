@@ -1,12 +1,14 @@
-# 235 (NHL)
+# 235 (NHL) React Native Application
 
 Application displays NHL scores with emphases on players of your chosen country.
+
+# Development
 
 ## Init
 
 - `npm install` - Install packages
 
-## Start
+## Start (for mac users)
 
 - `open -a Simulator` - Start simulator if not already started
 - `npx expo start` - Run app and choose platform
