@@ -8,10 +8,13 @@
 
 - `npm install` - Install packages
 
-### Start (for mac users)
+### Start
 
-- `open -a Simulator` - Start simulator if not already started
+- `open -a Simulator` - Start simulator if not already started (for mac users)
 - `npx expo start` - Run app and choose platform
+
+### Quit
+
 - `Ctrl + c` - Quit app
 
 ### Build to store (Testflight)

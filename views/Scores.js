@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ActivityIndicator, RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, RefreshControl, ScrollView, View } from 'react-native';
 import ScoreStatus from '../components/ScoreStatus';
 import { getDateStr } from '../components/ScoresTopbar';
 import ScoreTeam from '../components/ScoreTeam';
@@ -8,10 +8,11 @@ import { Topbar } from '../components/Topbar';
 import { ScoreContext } from '../context/Score/ScoreContext';
 import useScores from '../hooks/useScores';
 import { PlayerCard } from './PlayerCard';
+import styles from './Scores.styles';
 
 const Scores = () => {
   const { scoreState, dispatch } = useContext(ScoreContext);
-  const { loading, scores, error } = useScores();
+  const { loading, scores } = useScores();
 
   const onRefresh = () => {
     dispatch({ ...scoreState, update: true });
@@ -25,6 +26,8 @@ const Scores = () => {
   if (scoreState.activePlayer) {
     return <PlayerCard />;
   }
+
+  // TODO: Add error handling
 
   return (
     <>
@@ -55,42 +58,5 @@ const Scores = () => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  game: {
-    display: 'flex',
-    flexDirection: 'row',
-    width: '100%',
-    paddingBottom: 10,
-    justifyContent: 'space-evenly',
-    borderBottomWidth: 1,
-    borderBottomColor: '#454547'
-  },
-  player: {
-    fontSize: 12,
-    marginBottom: 5
-  },
-  scoreContainer: {
-    flex: 1,
-    alignItems: 'center',
-    width: '20%',
-    paddingTop: 5
-  },
-  score: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center'
-  },
-  scoreItem: {
-    fontSize: 14,
-    color: '#23ff06',
-    marginBottom: 5
-  },
-  status: {
-    fontSize: 10,
-    color: '#fff',
-    textAlign: 'center'
-  }
-});
 
 export default Scores;
