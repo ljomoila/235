@@ -10,7 +10,6 @@
 
 ### Start
 
-- `open -a Simulator` - Start simulator if not already started (for mac users)
 - `npx expo start` - Run app and choose platform
 
 ### Quit
@@ -33,3 +32,4 @@
 ### Troubleshoot
 
 - `npx expo init {app_name}` - This should be done out side of the project to troubleshoot whats wrong.
+- `open -a Simulator` - is simulator is not starting (ios)

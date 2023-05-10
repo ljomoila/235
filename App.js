@@ -11,7 +11,7 @@ const App = () => {
   useSetupApp();
   const { appState } = useContext(AppContext);
 
-  const getActiveView = () => {
+  const renderActiveView = () => {
     switch (appState.activeView) {
       case Views.SCORES:
         return (
@@ -36,17 +36,15 @@ const App = () => {
         hidden={false}
       />
 
-      <View>{appState.loading ? <ActivityIndicator /> : getActiveView()}</View>
+      <View>{appState.loading ? <ActivityIndicator /> : renderActiveView()}</View>
     </SafeAreaView>
   );
 };
 
-const Wrapper = () => {
+export default () => {
   return (
     <AppContextProvider>
       <App />
     </AppContextProvider>
   );
 };
-
-export default Wrapper;
