@@ -6,9 +6,10 @@ import { styles } from './App.styles';
 import Scores from './views/Scores';
 import AppContextProvider from './context/App/AppContextProvider';
 import ScoreContextProvider from './context/Score/ScoreContextProvider';
-import { Logs } from 'expo';
+import LoadingSpinner from './components/LoadingSpinner';
 
-Logs.enableExpoCliLogging();
+// import { Logs } from 'expo';
+// Logs.enableExpoCliLogging();
 
 const App = () => {
     useSetupApp();
@@ -39,13 +40,7 @@ const App = () => {
                 hidden={false}
             />
 
-            <View>
-                {appState.loading ? (
-                    <ActivityIndicator accessibilityHint="loading" />
-                ) : (
-                    renderActiveView()
-                )}
-            </View>
+            <View>{appState.loading ? <LoadingSpinner /> : renderActiveView()}</View>
         </SafeAreaView>
     );
 };

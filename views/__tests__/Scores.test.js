@@ -1,7 +1,7 @@
 import React from 'react';
 import Scores from '../Scores';
-import { renderTest } from '../../__tests__/testUtils';
-import { initialAppState } from '../../context/App/AppContext';
+import { initialScoreState } from '../../context/Score/ScoreContext';
+import { renderTest } from '../../testUtils';
 
 const useScoresMock = { loading: false, scores: [] };
 jest.mock('../../hooks/useScores', () => {
@@ -66,7 +66,7 @@ describe('Scores', () => {
     it('renders active player when set', () => {
         // when
         const { getByText } = renderTest(<Scores />, {
-            appState: { ...initialAppState, activePlayer: { fullName: 'Test Player' } }
+            scoreState: { ...initialScoreState, activePlayer: { fullName: 'Test Player' } }
         });
 
         // then

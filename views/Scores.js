@@ -9,6 +9,7 @@ import { ScoreContext } from '../context/Score/ScoreContext';
 import useScores from '../hooks/useScores';
 import { PlayerCard } from './PlayerCard';
 import styles from './Scores.styles';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const Scores = () => {
     const { scoreState, dispatch } = useContext(ScoreContext);
@@ -37,7 +38,7 @@ const Scores = () => {
                 right={{ title: 'Forward', onPress: () => onDateChange(1) }}
             />
             {loading ? (
-                <ActivityIndicator accessibilityHint="loading" />
+                <LoadingSpinner />
             ) : (
                 <ScrollView
                     refreshControl={
