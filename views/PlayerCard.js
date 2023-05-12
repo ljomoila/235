@@ -2,10 +2,9 @@ import { useContext } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { TeleText } from '../components/TeleText';
 import { Topbar } from '../components/Topbar';
-import { AppContext } from '../context/App/AppContext';
 import { ScoreContext } from '../context/Score/ScoreContext';
 import { usePlayerStats } from '../hooks/usePlayerStats';
-import { colors } from '../styles';
+import { colors } from '../App.styles';
 
 export const PlayerCard = () => {
   const { scoreState, dispatch } = useContext(ScoreContext);

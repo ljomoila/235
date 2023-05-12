@@ -11,52 +11,54 @@ import { PlayerCard } from './PlayerCard';
 import styles from './Scores.styles';
 
 const Scores = () => {
-  const { scoreState, dispatch } = useContext(ScoreContext);
-  const { loading, scores } = useScores();
+    const { scoreState, dispatch } = useContext(ScoreContext);
+    const { loading, scores } = useScores();
 
-  const onRefresh = () => {
-    dispatch({ ...scoreState, update: true });
-  };
+    const onRefresh = () => {
+        dispatch({ ...scoreState, update: true });
+    };
 
-  const onDateChange = (increment) => {
-    const dateIndex = scoreState.dateIndex + increment;
-    dispatch({ ...scoreState, dateIndex, update: true });
-  };
+    const onDateChange = (increment) => {
+        const dateIndex = scoreState.dateIndex + increment;
+        dispatch({ ...scoreState, dateIndex, update: true });
+    };
 
-  if (scoreState.activePlayer) {
-    return <PlayerCard />;
-  }
+    if (scoreState.activePlayer) {
+        return <PlayerCard />;
+    }
 
-  // TODO: Add error handling
+    // TODO: Add error handling
 
-  return (
-    <>
-      <Topbar
-        title={getDateStr(scoreState.dateIndex)}
-        left={{ title: 'Back', onPress: () => onDateChange(-1) }}
-        right={{ title: 'Forward', onPress: () => onDateChange(1) }}
-      />
-      {loading ? (
-        <ActivityIndicator />
-      ) : (
-        <ScrollView
-          refreshControl={<RefreshControl refreshing={loading} onRefresh={() => onRefresh()} />}
-        >
-          {scores.length ? (
-            scores.map(({ teams, status }, i) => (
-              <View key={i} style={styles.game}>
-                <ScoreTeam team={teams.home} />
-                <ScoreStatus teams={teams} status={status} />
-                <ScoreTeam team={teams.away} />
-              </View>
-            ))
-          ) : (
-            <TeleText>No scheduled games</TeleText>
-          )}
-        </ScrollView>
-      )}
-    </>
-  );
+    return (
+        <View data-testid="scores">
+            <Topbar
+                title={getDateStr(scoreState.dateIndex)}
+                left={{ title: 'Back', onPress: () => onDateChange(-1) }}
+                right={{ title: 'Forward', onPress: () => onDateChange(1) }}
+            />
+            {loading ? (
+                <ActivityIndicator accessibilityHint="loading" />
+            ) : (
+                <ScrollView
+                    refreshControl={
+                        <RefreshControl refreshing={loading} onRefresh={() => onRefresh()} />
+                    }
+                >
+                    {scores.length ? (
+                        scores.map(({ teams, status }, i) => (
+                            <View key={i} style={styles.game}>
+                                <ScoreTeam team={teams.home} />
+                                <ScoreStatus teams={teams} status={status} />
+                                <ScoreTeam team={teams.away} />
+                            </View>
+                        ))
+                    ) : (
+                        <TeleText>No scheduled games</TeleText>
+                    )}
+                </ScrollView>
+            )}
+        </View>
+    );
 };
 
 export default Scores;

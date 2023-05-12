@@ -1,4 +1,4 @@
-import { colors } from '../styles';
+import { colors } from '../App.styles';
 import { TeleText } from './TeleText';
 
 const ScorePlayer = ({ stats, styles, onPress }) => {
