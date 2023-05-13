@@ -12,8 +12,7 @@ describe('Scores', () => {
     jest.useFakeTimers().setSystemTime(new Date('2023-01-01'));
 
     beforeEach(() => {
-        useScoresMock.loading = false;
-        useScoresMock.scores = [];
+        useScoresMock = { loading: false, scores: [] };
     });
 
     it('renders topbar info and loading indicator while scores are loading', () => {

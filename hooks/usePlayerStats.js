@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from 'react';
-import Api from '../service/Api';
 import { ScoreContext } from '../context/Score/ScoreContext';
 import { AppContext } from '../context/App/AppContext';
 

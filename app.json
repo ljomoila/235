@@ -1,38 +1,38 @@
 {
-  "expo": {
-    "name": "nhl",
-    "slug": "235",
-    "version": "0.0.5",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": ["**/*"],
-    "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.ljomoila.235",
-      "buildNumber": "0.0.5"
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "description": "",
-    "extra": {
-      "eas": {
-        "projectId": "55302785-48aa-4583-9ad1-5204ca02c305"
-      }
+    "expo": {
+        "name": "nhl",
+        "slug": "235",
+        "version": "0.0.6",
+        "orientation": "portrait",
+        "icon": "./assets/icon.png",
+        "splash": {
+            "image": "./assets/splash.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#ffffff"
+        },
+        "updates": {
+            "fallbackToCacheTimeout": 0
+        },
+        "assetBundlePatterns": ["**/*"],
+        "ios": {
+            "supportsTablet": true,
+            "bundleIdentifier": "com.ljomoila.235",
+            "buildNumber": "0.0.6"
+        },
+        "android": {
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/adaptive-icon.png",
+                "backgroundColor": "#FFFFFF"
+            }
+        },
+        "web": {
+            "favicon": "./assets/favicon.png"
+        },
+        "description": "",
+        "extra": {
+            "eas": {
+                "projectId": "55302785-48aa-4583-9ad1-5204ca02c305"
+            }
+        }
     }
-  }
 }

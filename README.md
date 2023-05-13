@@ -14,7 +14,7 @@
 
 ### Test
 
--   `npm test` - Runs all the tests
+-   `npm test` - Runs all tests
 
 ### Build to store (Testflight)
 
