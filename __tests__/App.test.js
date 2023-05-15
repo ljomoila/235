@@ -7,19 +7,23 @@ jest.mock('../hooks/useSetupApp');
 
 describe('App', () => {
     it('renders loading indicator while app state loading', () => {
+        // given
+        initialAppState.loading = true;
+
         // when
-        const { getByAccessibilityHint } = renderTest(<App />, { appState: { loading: true } });
+        const { getByAccessibilityHint } = renderTest(<App />);
 
         // then
         expect(getByAccessibilityHint('loading')).toBeTruthy();
     });
 
     // TODO: for some reason context does not get mocked properly for App
-    it.skip('renders scores as active view', () => {
+    it('renders scores as active view', () => {
+        // given
+        initialAppState.loading = false;
+
         // when
-        const { getByTestId } = renderTest(<App />, {
-            appState: { ...initialAppState, loading: false, activeView: 'scores' }
-        });
+        const { getByTestId } = renderTest(<App />);
 
         // then
         expect(getByTestId('scores')).toBeTruthy();

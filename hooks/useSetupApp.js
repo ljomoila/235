@@ -14,7 +14,7 @@ export const useSetupApp = () => {
 
         try {
             const teams = await api.getTeams();
-            dispatch({ ...appState, api, teams, loading: false });
+            dispatch({ ...appState, teams, loading: false });
         } catch (e) {
             console.error(e);
             dispatch({ ...appState, error: e.message });

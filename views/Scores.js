@@ -54,7 +54,7 @@ const Scores = () => {
     };
 
     return (
-        <View data-testid="scores">
+        <View testID="scores">
             <Topbar
                 title={getDateStr(scoreState.dateIndex)}
                 left={{ title: 'Back', onPress: () => onDateChange(-1) }}
