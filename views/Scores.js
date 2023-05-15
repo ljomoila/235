@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ActivityIndicator, RefreshControl, ScrollView, View } from 'react-native';
+import { RefreshControl, ScrollView, View } from 'react-native';
 import ScoreStatus from '../components/ScoreStatus';
 import { getDateStr } from '../components/ScoresTopbar';
 import ScoreTeam from '../components/ScoreTeam';
@@ -13,7 +13,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 
 const Scores = () => {
     const { scoreState, dispatch } = useContext(ScoreContext);
-    const { loading, scores } = useScores();
+    const { loading, scores, error } = useScores();
 
     const onRefresh = () => {
         dispatch({ ...scoreState, update: true });
@@ -28,7 +28,30 @@ const Scores = () => {
         return <PlayerCard />;
     }
 
-    // TODO: Add error handling
+    const renderScoresContent = () => {
+        if (loading) return <LoadingSpinner />;
+        else if (error) return <Notification message="Failed to load scores" />;
+
+        return (
+            <ScrollView
+                refreshControl={
+                    <RefreshControl refreshing={loading} onRefresh={() => onRefresh()} />
+                }
+            >
+                {scores.length ? (
+                    scores.map(({ teams, status }, i) => (
+                        <View key={i} style={styles.game}>
+                            <ScoreTeam team={teams.home} />
+                            <ScoreStatus teams={teams} status={status} />
+                            <ScoreTeam team={teams.away} />
+                        </View>
+                    ))
+                ) : (
+                    <TeleText>No scheduled games</TeleText>
+                )}
+            </ScrollView>
+        );
+    };
 
     return (
         <View data-testid="scores">
@@ -37,27 +60,7 @@ const Scores = () => {
                 left={{ title: 'Back', onPress: () => onDateChange(-1) }}
                 right={{ title: 'Forward', onPress: () => onDateChange(1) }}
             />
-            {loading ? (
-                <LoadingSpinner />
-            ) : (
-                <ScrollView
-                    refreshControl={
-                        <RefreshControl refreshing={loading} onRefresh={() => onRefresh()} />
-                    }
-                >
-                    {scores.length ? (
-                        scores.map(({ teams, status }, i) => (
-                            <View key={i} style={styles.game}>
-                                <ScoreTeam team={teams.home} />
-                                <ScoreStatus teams={teams} status={status} />
-                                <ScoreTeam team={teams.away} />
-                            </View>
-                        ))
-                    ) : (
-                        <TeleText>No scheduled games</TeleText>
-                    )}
-                </ScrollView>
-            )}
+            {renderScoresContent()}
         </View>
     );
 };

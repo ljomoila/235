@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View, StatusBar, ActivityIndicator, SafeAreaView } from 'react-native';
+import { View, StatusBar, SafeAreaView } from 'react-native';
 import { useSetupApp } from './hooks/useSetupApp';
 import { AppContext, Views } from './context/App/AppContext';
 import { styles } from './App.styles';
