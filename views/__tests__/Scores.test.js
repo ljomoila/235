@@ -2,22 +2,20 @@ import React from 'react';
 import Scores from '../Scores';
 import { initialScoreState } from '../../context/Score/ScoreContext';
 import { renderTest } from '../../testUtils';
+import useScores from '../../hooks/useScores';
 
-const useScoresMock = { loading: false, scores: [] };
-jest.mock('../../hooks/useScores', () => {
-    return jest.fn(() => useScoresMock);
-});
+jest.mock('../../hooks/useScores');
 
 describe('Scores', () => {
     jest.useFakeTimers().setSystemTime(new Date('2023-01-01'));
 
     beforeEach(() => {
-        useScoresMock = { loading: false, scores: [] };
+        useScores.mockReturnValue({ loading: false, scores: [] });
     });
 
     it('renders topbar info and loading indicator while scores are loading', () => {
         // given
-        useScoresMock.loading = true;
+        useScores.mockReturnValue({ loading: true, scores: [] });
 
         // when
         const { getByAccessibilityHint, getByText } = renderTest(<Scores />);
@@ -31,18 +29,21 @@ describe('Scores', () => {
 
     it('renders scores view', () => {
         // given
-        useScoresMock.scores = [
-            {
-                dateTime: 1683932400000,
-                status: 'SCHEDULED',
-                teams: { away: { players: [] }, home: { players: [] } }
-            },
-            {
-                dateTime: 1683943200000,
-                status: 'SCHEDULED',
-                teams: { away: { players: [] }, home: { players: [] } }
-            }
-        ];
+        useScores.mockReturnValue({
+            loading: false,
+            scores: [
+                {
+                    dateTime: 1683932400000,
+                    status: 'SCHEDULED',
+                    teams: { away: { players: [] }, home: { players: [] } }
+                },
+                {
+                    dateTime: 1683943200000,
+                    status: 'SCHEDULED',
+                    teams: { away: { players: [] }, home: { players: [] } }
+                }
+            ]
+        });
 
         // when
         const { getAllByText } = renderTest(<Scores />);
@@ -53,7 +54,7 @@ describe('Scores', () => {
 
     it('renders no schduled games when no scores', () => {
         // given
-        useScoresMock.scores = [];
+        useScores.mockReturnValue({ loading: false, scores: [] });
 
         // when
         const { getByText } = renderTest(<Scores />);
