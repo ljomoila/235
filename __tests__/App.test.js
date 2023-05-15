@@ -17,7 +17,6 @@ describe('App', () => {
         expect(getByAccessibilityHint('loading')).toBeTruthy();
     });
 
-    // TODO: for some reason context does not get mocked properly for App
     it('renders scores as active view', () => {
         // given
         initialAppState.loading = false;
