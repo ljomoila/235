@@ -7,6 +7,8 @@ import Scores from './views/Scores';
 import AppContextProvider from './context/App/AppContextProvider';
 import ScoreContextProvider from './context/Score/ScoreContextProvider';
 import LoadingSpinner from './components/LoadingSpinner';
+import SelectCountry from './views/SelectCountry';
+import SwipeView from './components/SwipeView';
 
 // import { Logs } from 'expo';
 // Logs.enableExpoCliLogging();
@@ -17,6 +19,8 @@ const App = () => {
 
     const renderActiveView = () => {
         switch (appState.activeView) {
+            case Views.SELECT_COUNTRY:
+                return <SelectCountry />;
             case Views.SCORES:
                 return (
                     <ScoreContextProvider>
@@ -39,8 +43,9 @@ const App = () => {
                 showHideTransition="fade"
                 hidden={false}
             />
-
-            <View>{appState.loading ? <LoadingSpinner /> : renderActiveView()}</View>
+            <SwipeView style={styles.container}>
+                {appState.loading ? <LoadingSpinner /> : renderActiveView()}
+            </SwipeView>
         </SafeAreaView>
     );
 };

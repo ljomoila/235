@@ -17,7 +17,7 @@ describe('App', () => {
         expect(getByAccessibilityHint('loading')).toBeTruthy();
     });
 
-    it('renders scores as active view', () => {
+    it('renders select country as default view', () => {
         // given
         initialAppState.loading = false;
 
@@ -25,6 +25,6 @@ describe('App', () => {
         const { getByTestId } = renderTest(<App />);
 
         // then
-        expect(getByTestId('scores')).toBeTruthy();
+        expect(getByTestId('select-country')).toBeTruthy();
     });
 });

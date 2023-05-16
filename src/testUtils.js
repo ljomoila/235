@@ -6,7 +6,10 @@ import { render } from '@testing-library/react-native';
 export const renderTest = (component, props = {}) => {
     return render(
         <AppContext.Provider
-            value={{ dispatch: jest.fn(), appState: props.appState || initialAppState }}
+            value={{
+                dispatch: props.appDispatch || jest.fn(),
+                appState: props.appState || initialAppState
+            }}
         >
             <ScoreContext.Provider
                 value={{ dispatch: jest.fn(), scoreState: props.scoreState || initialScoreState }}

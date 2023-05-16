@@ -6,7 +6,7 @@ export const useSetupApp = () => {
     const { appState, dispatch } = useContext(AppContext);
     const { api } = appState;
     let [fontsLoaded] = useFonts({
-        Teletext: require('../assets/fonts/EuropeanTeletext.otf')
+        Teletext: require('../../assets/fonts/EuropeanTeletext.otf')
     });
 
     const getTeams = async () => {
@@ -16,8 +16,8 @@ export const useSetupApp = () => {
             const teams = await api.getTeams();
             dispatch({ ...appState, teams, loading: false });
         } catch (e) {
-            console.error(e);
-            dispatch({ ...appState, error: e.message });
+            console.error(e.message);
+            dispatch({ ...appState, error: 'Failed to get teams' });
         }
     };
 

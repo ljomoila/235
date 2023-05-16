@@ -12,6 +12,10 @@
 
 -   `npx expo start` - Run app and choose platform
 
+### Build
+
+-   `expo run:ios/android` - Builds XCode project and runs it in simulator
+
 ### Test
 
 -   `npm test` - Runs all tests
