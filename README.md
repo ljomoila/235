@@ -4,6 +4,8 @@
 
 ## Development
 
+Make sure you have XCode and/or Android Studio installed in your computer.
+
 ### Init
 
 -   `npm install` - Installs packages
