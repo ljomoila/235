@@ -21,7 +21,14 @@ const COUNTRIES = {
     France: 'FRA',
     Austria: 'AUT',
     Slovenia: 'SLO',
-    Kazakhstan: 'KAZ'
+    Kazakhstan: 'KAZ',
+    'United Kingdom': 'GBR',
+    Italy: 'ITA',
+    Hungary: 'HUN',
+    Ukraine: 'UKR',
+    Poland: 'POL',
+    Japan: 'JPN',
+    'South Korea': 'KOR'
 };
 
 const SelectCountry = () => {
@@ -46,11 +53,11 @@ const SelectCountry = () => {
                     color: 'blue'
                 }}
             >
-                {Object.entries(COUNTRIES).map(([key, value]) => {
-                    return (
-                        <Picker.Item testID="country-item" key={key} label={key} value={value} />
-                    );
-                })}
+                {Object.entries(COUNTRIES)
+                    .sort()
+                    .map(([key, value]) => (
+                        <Picker.Item key={key} label={key} value={value} />
+                    ))}
             </Picker>
 
             <Button title="Select" onPress={onSelect} />

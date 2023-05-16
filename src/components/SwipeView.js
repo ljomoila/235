@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { AppContext } from '../context/App/AppContext';
+import { AppContext, Views } from '../context/App/AppContext';
 import { ScrollView } from 'react-native';
 import { useSwipe } from '../hooks/useSwipe';
 

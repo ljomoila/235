@@ -27,8 +27,6 @@ const App = () => {
                         <Scores />
                     </ScoreContextProvider>
                 );
-            case Views.STANDINGS:
-                return null;
             default:
                 return null;
         }

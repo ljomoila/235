@@ -7,6 +7,7 @@ describe('SelectCountry', () => {
     it('renders picker, changes country and view when country changed and selected', () => {
         // given
         const appDispatch = jest.fn();
+
         // when
         const { getByTestId, getByText } = renderTest(<SelectCountry />, { appDispatch });
 
