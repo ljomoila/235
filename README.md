@@ -1,20 +1,20 @@
 # 235 (NHL)
 
-235 is a React Native application that displays NHL scores with emphases on players of your chosen country.
+235 is a React Native application that displays NHL scores with emphases on players of your chosen country. Application works on iOS and Anrdoid devices.
 
 ## Development
 
 ### Init
 
--   `npm install` - Install packages
+-   `npm install` - Installs packages
 
 ### Start
 
--   `npx expo start` - Run app and choose platform
+-   `npx expo start` - Runs app in simulator for a chosen platform
 
 ### Build
 
--   `expo run:ios/android` - Builds XCode project and runs it in simulator
+-   `expo run:ios/android` - Builds project and runs it in simulator
 
 ### Test
 
@@ -29,11 +29,6 @@
 5. Go to App Store -> https://appstoreconnect.apple.com/apps/{app}/testflight
 6. When loading done, install via Testflight iOS app.
 
-### Update teams on file
-
-`npm run update`
-
 ### Troubleshoot
 
--   `npx expo init {app_name}` - This should be done out side of the project to troubleshoot whats wrong.
--   `open -a Simulator` - is simulator is not starting (ios)
+-   `open -a Simulator` - if simulator is not starting (ios)
