@@ -10,6 +10,7 @@ import useScores from '../hooks/useScores';
 import { PlayerCard } from './PlayerCard';
 import styles from './Scores.styles';
 import LoadingSpinner from '../components/LoadingSpinner';
+import Notification from '../components/Notification';
 
 const Scores = () => {
     const { scoreState, dispatch } = useContext(ScoreContext);

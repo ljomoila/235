@@ -74,8 +74,8 @@ const useScores = () => {
         );
     };
 
+    // Set nationality and display name for the players
     const setPlayersAdditionalInformation = async (home, away) => {
-        // Set nationality and display name for the players
         const allPlayers = [...home.players, ...away.players];
 
         await Promise.all(
@@ -89,29 +89,38 @@ const useScores = () => {
 
     const setTeamPlayers = (players) => {
         const teamPlayers = [];
+
         for (const [key, value] of Object.entries(players)) {
             const player = players[key];
             const { goals, assists } = player.stats.skaterStats || { goals: 0, assists: 0 };
 
-            if (goals > 0 || assists > 0)
+            if (goals > 0 || assists > 0) {
                 teamPlayers.push({ type: 'scorer', player: players[key].person, goals, assists });
+            }
             if (player.position.code === 'G') {
-                const { saves, shots, savePercentage, timeOnIce, _goals, _assists } =
-                    player.stats.goalieStats;
-                let points = '';
+                const { savePercentage, timeOnIce } = player.stats.goalieStats;
+
                 if (timeOnIce === '00:00' || isNaN(savePercentage)) continue;
-                if (_goals > 0 || _assists > 0) points = _goals + '-' + _assists;
-                teamPlayers.push({
-                    type: 'goalie',
-                    player: player.person,
-                    saves,
-                    shots,
-                    savePercentage,
-                    points
-                });
+
+                teamPlayers.push(setGoalieStats(player));
             }
         }
         return teamPlayers;
+    };
+
+    const setGoalieStats = (goalie) => {
+        const { saves, shots, savePercentage, _goals, _assists } = goalie.stats.goalieStats;
+
+        const points = _goals > 0 || _assists > 0 ? _goals + '-' + _assists : '';
+
+        return {
+            type: 'goalie',
+            player: goalie.person,
+            saves,
+            shots,
+            savePercentage,
+            points
+        };
     };
 
     const setTeamShortNames = (games) => {

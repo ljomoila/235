@@ -15,10 +15,8 @@ describe('SelectCountry', () => {
         const picker = getByTestId('select-country');
         expect(picker).toBeTruthy();
 
-        // when: country selected
+        // when: country selected and select button pressed
         fireEvent(picker, 'onValueChange', 'CAN');
-
-        // and: select button pressed
         fireEvent(getByText('Select'), 'onPress');
 
         // then
