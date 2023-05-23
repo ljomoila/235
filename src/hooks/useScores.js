@@ -110,7 +110,6 @@ const useScores = () => {
 
     const setGoalieStats = (goalie) => {
         const { saves, shots, savePercentage, _goals, _assists } = goalie.stats.goalieStats;
-
         const points = _goals > 0 || _assists > 0 ? _goals + '-' + _assists : '';
 
         return {
