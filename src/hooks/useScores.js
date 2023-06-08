@@ -21,7 +21,7 @@ const useScores = () => {
             setGames(games);
         } catch (e) {
             console.error(e);
-            setError(e.message);
+            setError(true);
         } finally {
             setLoading(false);
             dispatch({ ...scoreState, update: false });

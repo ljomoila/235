@@ -12,10 +12,11 @@ export const usePlayerStats = (statsType) => {
     const fetch = async () => {
         try {
             const stats = await api.getPlayerStats(scoreState.activePlayer.id, statsType);
+
             setStats(stats);
         } catch (e) {
             console.error(e);
-            setError(e.message);
+            setError(true);
         } finally {
             setLoading(false);
         }

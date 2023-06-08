@@ -6,8 +6,6 @@ export const getDateStr = (index) => {
     let date = new Date();
     date.setDate(date.getDate() + (index || 0));
 
-    console.log(formatDate(date));
-
     return formatDate(date);
 };
 

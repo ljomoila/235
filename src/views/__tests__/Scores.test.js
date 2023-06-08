@@ -31,16 +31,18 @@ describe('Scores', () => {
         // given
         useScores.mockReturnValue({
             loading: false,
-            scores: [
+            games: [
                 {
                     dateTime: 1683932400000,
                     status: 'SCHEDULED',
-                    teams: { away: { players: [] }, home: { players: [] } }
+                    away: { players: [] },
+                    home: { players: [] }
                 },
                 {
                     dateTime: 1683943200000,
                     status: 'SCHEDULED',
-                    teams: { away: { players: [] }, home: { players: [] } }
+                    away: { players: [] },
+                    home: { players: [] }
                 }
             ]
         });
@@ -54,7 +56,7 @@ describe('Scores', () => {
 
     it('renders no schduled games when no scores', () => {
         // given
-        useScores.mockReturnValue({ loading: false, scores: [] });
+        useScores.mockReturnValue({ loading: false, games: [] });
 
         // when
         const { getByText } = renderTest(<Scores />);

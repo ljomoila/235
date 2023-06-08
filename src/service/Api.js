@@ -1,11 +1,15 @@
-// TODO: environment variables
+// TODO: move to environment variables
 const API_BASE_URL = 'http://localhost:8080'; //'https://statsapi.web.nhl.com/api/v1';
 
 export default class Api {
     async doFetch(url) {
         try {
             const response = await fetch(API_BASE_URL + url);
-            return response.json();
+            const responseJson = response.json();
+
+            if (responseJson.error) throw new Error(responseJson.message);
+
+            return responseJson;
         } catch (e) {
             throw new Error(`Fetch to ${url} failed, error: ${e.message}`);
         }
