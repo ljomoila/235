@@ -1,54 +1,45 @@
-const NHL_API_BASE_URL = 'https://statsapi.web.nhl.com/api/v1';
+// TODO: environment variables
+const API_BASE_URL = 'http://localhost:8080'; //'https://statsapi.web.nhl.com/api/v1';
 
 export default class Api {
     async doFetch(url) {
         try {
-            const response = await fetch(NHL_API_BASE_URL + url);
+            const response = await fetch(API_BASE_URL + url);
             return response.json();
         } catch (e) {
-            throw new Error(`Fetch failed ${e.message}`);
+            throw new Error(`Fetch to ${url} failed, error: ${e.message}`);
         }
     }
 
     async getTeams() {
-        const response = await this.doFetch('/teams');
-        return response.teams;
+        return await this.doFetch('/teams');
     }
 
     async getTeam(id) {
-        const response = await this.doFetch('/teams/' + id);
-        return response.teams;
+        return await this.doFetch('/teams/' + id);
     }
 
     async getRoster(teamId) {
-        const response = await this.doFetch(`/teams/${teamId}/roster`);
-        return response.roster;
+        return await this.doFetch(`/teams/${teamId}/roster`);
     }
 
-    async getPlayer(playerId) {
-        const response = await this.doFetch('/people/' + playerId);
-        return response.people[0];
+    async getPlayer(apiLink) {
+        return await this.doFetch('/player/' + apiLink);
     }
 
     async getSchedule() {
-        const response = await this.doFetch('/schedule');
-        return response.dates.length > 0 ? response.dates[0].games : [];
-    }
-
-    async getScheduleByDate(date) {
-        const response = await this.doFetch(`/schedule?date=${date}`);
-
-        return response.dates.length ? response.dates[0].games : [];
+        return await this.doFetch('/schedule');
     }
 
     async getLiveFeed(gamePk) {
         return await this.doFetch(`/game/${gamePk}/feed/live`);
     }
 
-    async getPlayerStats(playerId, statType) {
-        const response = await this.doFetch(`/people/${playerId}/stats?stats=${statType}`);
-        if (response.stats.length) return response.stats[0].splits;
+    async getGames(date) {
+        return await this.doFetch(`/games/${date}`);
+    }
 
-        return [];
+    async getPlayerStats(playerId, statsType) {
+        return await this.doFetch(`/player/${playerId}/stats/${statsType}`);
     }
 }

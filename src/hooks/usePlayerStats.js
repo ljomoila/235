@@ -11,8 +11,8 @@ export const usePlayerStats = (statsType) => {
 
     const fetch = async () => {
         try {
-            const splits = await api.getPlayerStats(scoreState.activePlayer.id, statsType);
-            setStats(splits[splits.length - 1].stat);
+            const stats = await api.getPlayerStats(scoreState.activePlayer.id, statsType);
+            setStats(stats);
         } catch (e) {
             console.error(e);
             setError(e.message);

@@ -14,7 +14,7 @@ import Notification from '../components/Notification';
 
 const Scores = () => {
     const { scoreState, dispatch } = useContext(ScoreContext);
-    const { loading, scores, error } = useScores();
+    const { loading, games, error } = useScores();
 
     const onRefresh = () => {
         dispatch({ ...scoreState, update: true });
@@ -39,12 +39,12 @@ const Scores = () => {
                     <RefreshControl refreshing={loading} onRefresh={() => onRefresh()} />
                 }
             >
-                {scores.length ? (
-                    scores.map(({ teams, status }, i) => (
+                {games.length ? (
+                    games.map(({ home, away, status }, i) => (
                         <View key={i} style={styles.game}>
-                            <ScoreTeam team={teams.home} />
-                            <ScoreStatus teams={teams} status={status} />
-                            <ScoreTeam team={teams.away} />
+                            <ScoreTeam team={home} homeTeam={true} />
+                            <ScoreStatus home={home} away={away} status={status} />
+                            <ScoreTeam team={away} />
                         </View>
                     ))
                 ) : (
