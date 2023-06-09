@@ -19,6 +19,7 @@ export const PlayerCard = () => {
         if (loading) return <LoadingSpinner />;
         else if (error) return <Notification message="Failed to load player stats" />;
 
+        // TODO: refactor when player stats POJO comes from backend
         return Object.entries(stats).map((key, value) => {
             return (
                 <TeleText
