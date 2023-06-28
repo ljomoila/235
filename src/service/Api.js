@@ -5,7 +5,10 @@ export default class Api {
     async doFetch(url) {
         try {
             const response = await fetch(API_BASE_URL + url);
-            const responseJson = response.json();
+
+            if (!response.ok) throw new Error('Status not ok');
+
+            const responseJson = await response.json();
 
             if (responseJson.error) throw new Error(responseJson.message);
 
