@@ -3,6 +3,7 @@ import Scores from '../Scores';
 import { initialScoreState } from '../../context/Score/ScoreContext';
 import { renderTest } from '../../testUtils';
 import useScores from '../../hooks/useScores';
+import { waitFor } from '@testing-library/react-native';
 
 jest.mock('../../hooks/useScores');
 
@@ -65,13 +66,13 @@ describe('Scores', () => {
         expect(getByText('No scheduled games')).toBeTruthy();
     });
 
-    it('renders active player when set', () => {
+    it('renders active player when set', async () => {
         // when
         const { getByText } = renderTest(<Scores />, {
             scoreState: { ...initialScoreState, activePlayer: { fullName: 'Test Player' } }
         });
 
         // then
-        expect(getByText('Test Player')).toBeTruthy();
+        await waitFor(() => expect(getByText('Test Player')).toBeTruthy());
     });
 });
