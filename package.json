@@ -42,7 +42,19 @@
             "!**/coverage/**",
             "!**/node_modules/**",
             "!**/babel.config.js",
-            "!**/jest.setup.js"
-        ]
+            "!**/jest.setup.js",
+            "!**/fileWriter.js",
+            "!**/metro.config.js",
+            "!**/testUtils.js",
+            "!**/*.styles.js"
+        ],
+        "coverageThreshold": {
+            "global": {
+                "branches": 0,
+                "functions": 0,
+                "lines": 0,
+                "statements": 0
+            }
+        }
     }
 }
