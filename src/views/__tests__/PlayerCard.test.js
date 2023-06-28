@@ -3,6 +3,7 @@ import { PlayerCard } from '../PlayerCard';
 import { renderTest } from '../../testUtils';
 import { initialScoreState } from '../../context/Score/ScoreContext';
 import { usePlayerStats } from '../../hooks/usePlayerStats';
+import { waitFor } from '@testing-library/react-native';
 
 jest.mock('../../hooks/usePlayerStats');
 
@@ -13,7 +14,7 @@ describe('PlayerCard', () => {
         usePlayerStats.mockReturnValue({ loading: false, stats: {} });
     });
 
-    it('renders topbar and loading spinner while player stats loading', () => {
+    it('renders topbar and loading spinner while player stats loading', async () => {
         // given
         usePlayerStats.mockReturnValue({ loading: true });
 
@@ -21,12 +22,12 @@ describe('PlayerCard', () => {
         const { getByAccessibilityHint, getByText } = renderTest(<PlayerCard />, { scoreState });
 
         // then
-        expect(getByText('Test Player')).toBeTruthy();
+        await waitFor(() => expect(getByText('Test Player')).toBeTruthy());
         expect(getByText('Back')).toBeTruthy();
         expect(getByAccessibilityHint('loading')).toBeTruthy();
     });
 
-    it('renders player stats', () => {
+    it('renders player stats', async () => {
         // given
         usePlayerStats.mockReturnValue({
             loading: false,
@@ -37,10 +38,10 @@ describe('PlayerCard', () => {
         const { getAllByTestId } = renderTest(<PlayerCard />, { scoreState });
 
         // then
-        expect(getAllByTestId('player-stat').length).toEqual(2);
+        await waitFor(() => expect(getAllByTestId('player-stat').length).toEqual(2));
     });
 
-    it('renders error when loading stats fails', () => {
+    it('renders error when loading stats fails', async () => {
         // given
         usePlayerStats.mockReturnValue({ loading: false, error: true });
 
@@ -48,6 +49,6 @@ describe('PlayerCard', () => {
         const { getByText } = renderTest(<PlayerCard />, { scoreState });
 
         // then
-        expect(getByText('Failed to load player stats')).toBeTruthy();
+        await waitFor(() => expect(getByText('Failed to load player stats')).toBeTruthy());
     });
 });
