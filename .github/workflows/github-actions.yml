@@ -14,6 +14,3 @@ jobs:
                   node-version: '19.x'
             - run: npm ci
             - run: npm run test:ci
-        env:
-            NODE_ENV: test
-            CI: false

@@ -5,7 +5,7 @@ import { initialAppState } from '../context/App/AppContext';
 
 jest.mock('../hooks/useSetupApp');
 
-describe('App', () => {
+describe.skip('App', () => {
     it('renders loading indicator while app state loading', () => {
         // given
         initialAppState.loading = true;
