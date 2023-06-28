@@ -1,17 +1,6 @@
-name: 235 (NHL) CI
-
-on: [push]
-
-jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18.x'
-    - run: npm ci
-    - run: npm test
+name: Run tests
+  run: |
+    npm install
+    npm run test:ci
+  env:
+    NODE_ENV: test
