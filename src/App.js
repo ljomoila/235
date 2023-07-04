@@ -1,50 +1,77 @@
-import React, { useContext } from 'react';
-import { View, StatusBar, SafeAreaView } from 'react-native';
+import React from 'react';
 import { useSetupApp } from './hooks/useSetupApp';
-import { AppContext, Views } from './context/App/AppContext';
-import { styles } from './App.styles';
 import Scores from './views/Scores';
 import AppContextProvider from './context/App/AppContextProvider';
 import ScoreContextProvider from './context/Score/ScoreContextProvider';
-import LoadingSpinner from './components/LoadingSpinner';
 import SelectCountry from './views/SelectCountry';
-import SwipeView from './components/SwipeView';
+import { PlayerCard } from './views/PlayerCard';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+import { useNavigationContainerRef } from '@react-navigation/native';
+import { CalendarButton } from './components/CalendarButton';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Stats from './views/Stats';
 
 // import { Logs } from 'expo';
 // Logs.enableExpoCliLogging();
 
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+const TabNavigator = () => {
+    return (
+        <Tab.Navigator>
+            <Tab.Screen name="Home" component={StackNavigator} />
+            <Tab.Screen name="Stats" component={Stats} />
+        </Tab.Navigator>
+    );
+};
+
+const StackNavigator = () => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="SelectCountry" component={SelectCountry} />
+            <Stack.Screen
+                name="Scores"
+                component={ScoresScreen}
+                options={{
+                    headerRight: () => <CalendarButton />,
+                    //headerStyle: { backgroundColor: 'black' },
+                    contentStyle: { backgroundColor: 'black' }
+                }}
+            />
+            <Stack.Screen name="PlayerCard" component={PlayerCard} />
+            <Stack.Screen name="Stats" component={Stats} />
+        </Stack.Navigator>
+    );
+};
+
+const ScoresScreen = () => {
+    return (
+        <ScoreContextProvider>
+            <Scores />
+        </ScoreContextProvider>
+    );
+};
+
 const App = () => {
     useSetupApp();
-    const { appState } = useContext(AppContext);
+    // const navigationRef = useNavigationContainerRef();
 
-    const renderActiveView = () => {
-        switch (appState.activeView) {
-            case Views.SELECT_COUNTRY:
-                return <SelectCountry />;
-            case Views.SCORES:
-                return (
-                    <ScoreContextProvider>
-                        <Scores />
-                    </ScoreContextProvider>
-                );
-            default:
-                return null;
-        }
-    };
+    // const navTheme = {
+    //     ...DefaultTheme,
+    //     colors: {
+    //         ...DefaultTheme.colors,
+    //         background: '#000'
+    //     }
+    // };
 
     return (
-        <SafeAreaView style={styles.container}>
-            <StatusBar
-                animated={true}
-                backgroundColor="#000"
-                barStyle="dark-content"
-                showHideTransition="fade"
-                hidden={false}
-            />
-            <SwipeView style={styles.container}>
-                {appState.loading ? <LoadingSpinner /> : renderActiveView()}
-            </SwipeView>
-        </SafeAreaView>
+        // <NavigationContainer ref={navigationRef} theme={navTheme}>
+        <NavigationContainer>
+            <TabNavigator />
+            {/* <StackNavigator /> */}
+        </NavigationContainer>
     );
 };
 

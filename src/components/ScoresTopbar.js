@@ -9,7 +9,7 @@ export const getDateStr = (index) => {
     return formatDate(date);
 };
 
-const formatDate = (date) => {
+export const formatDate = (date) => {
     return date.toISOString().split('T')[0];
 };
 

@@ -1,5 +1,5 @@
 // TODO: move to environment variables
-const API_BASE_URL = 'http://localhost:8080'; //'https://statsapi.web.nhl.com/api/v1';
+const API_BASE_URL = 'https://nhl-service.greensea-4b620c72.westus2.azurecontainerapps.io'; //'https://statsapi.web.nhl.com/api/v1';
 
 export default class Api {
     async doFetch(url) {

@@ -1,19 +1,11 @@
-import { useContext } from 'react';
 import { TeleText } from '../components/TeleText';
-import { Topbar } from '../components/Topbar';
-import { ScoreContext } from '../context/Score/ScoreContext';
 import { usePlayerStats } from '../hooks/usePlayerStats';
 import { colors } from '../App.styles';
 import LoadingSpinner from '../components/LoadingSpinner';
 import Notification from '../components/Notification';
 
 export const PlayerCard = () => {
-    const { scoreState, dispatch } = useContext(ScoreContext);
     const { loading, stats, error } = usePlayerStats('yearByYear');
-
-    const onBack = () => {
-        dispatch({ ...scoreState, activePlayer: null });
-    };
 
     const renderContent = () => {
         if (loading) return <LoadingSpinner />;
@@ -31,14 +23,5 @@ export const PlayerCard = () => {
         });
     };
 
-    return (
-        <>
-            <Topbar
-                left={{ title: 'Back', onPress: onBack }}
-                title={scoreState.activePlayer.fullName}
-            />
-
-            {renderContent()}
-        </>
-    );
+    return <>{renderContent()}</>;
 };

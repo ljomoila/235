@@ -1,7 +1,7 @@
 import { Picker } from '@react-native-picker/picker';
 import { Button } from 'react-native';
 import { useContext, useState } from 'react';
-import { AppContext, Views } from '../context/App/AppContext';
+import { AppContext } from '../context/App/AppContext';
 
 // TODO: fetch and map all current countries from API
 const COUNTRIES = {
@@ -31,16 +31,17 @@ const COUNTRIES = {
     'South Korea': 'KOR'
 };
 
-const SelectCountry = () => {
+const SelectCountry = ({ navigation }) => {
     const { appState, dispatch } = useContext(AppContext);
     const [country, setCountry] = useState(appState.selectedCountry);
 
-    const onCountryChange = (value) => {
-        setCountry(value);
+    const onCountryChange = (country) => {
+        setCountry(country);
+        dispatch({ ...appState, selectedCountry: country });
     };
 
     const onSelect = () => {
-        dispatch({ ...appState, selectedCountry: country, activeView: Views.SCORES });
+        navigation.navigate('Scores');
     };
 
     return (

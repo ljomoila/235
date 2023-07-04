@@ -1,13 +1,15 @@
 import { useContext } from 'react';
 import { colors } from '../App.styles';
 import { TeleText } from './TeleText';
-import { AppContext } from '../context/App/AppContext';
+import { AppContext, Views } from '../context/App/AppContext';
 import { ScoreContext } from '../context/Score/ScoreContext';
+import { useNavigation } from '@react-navigation/native';
 
 const ScorePlayer = ({ player, styles }) => {
     const { appState } = useContext(AppContext);
     const { scoreState, dispatch } = useContext(ScoreContext);
     const { position, lastName, nationality, points } = player;
+    const navigation = useNavigation();
 
     styles.color = nationality === appState.selectedCountry ? colors.green : colors.blue;
 
@@ -21,12 +23,14 @@ const ScorePlayer = ({ player, styles }) => {
         }
     };
 
-    const onPress = (player) => {
+    const onPlayerPressed = (player) => {
+        // TODO: create own context for the player
         dispatch({ ...scoreState, activePlayer: player });
+        navigation.navigate('PlayerCard');
     };
 
     return (
-        <TeleText style={styles} onPress={() => onPress(player)}>
+        <TeleText style={styles} onPress={() => onPlayerPressed(player)}>
             {renderStats()}
         </TeleText>
     );

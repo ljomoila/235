@@ -4,10 +4,8 @@ import ScoreStatus from '../components/ScoreStatus';
 import { getDateStr } from '../components/ScoresTopbar';
 import ScoreTeam from '../components/ScoreTeam';
 import { TeleText } from '../components/TeleText';
-import { Topbar } from '../components/Topbar';
 import { ScoreContext } from '../context/Score/ScoreContext';
 import useScores from '../hooks/useScores';
-import { PlayerCard } from './PlayerCard';
 import styles from './Scores.styles';
 import LoadingSpinner from '../components/LoadingSpinner';
 import Notification from '../components/Notification';
@@ -19,15 +17,6 @@ const Scores = () => {
     const onRefresh = () => {
         dispatch({ ...scoreState, update: true });
     };
-
-    const onDateChange = (increment) => {
-        const dateIndex = scoreState.dateIndex + increment;
-        dispatch({ ...scoreState, dateIndex, update: true });
-    };
-
-    if (scoreState.activePlayer) {
-        return <PlayerCard />;
-    }
 
     const renderScoresContent = () => {
         if (loading) return <LoadingSpinner />;
@@ -54,16 +43,7 @@ const Scores = () => {
         );
     };
 
-    return (
-        <View testID="scores">
-            <Topbar
-                title={getDateStr(scoreState.dateIndex)}
-                left={{ title: 'Back', onPress: () => onDateChange(-1) }}
-                right={{ title: 'Forward', onPress: () => onDateChange(1) }}
-            />
-            {renderScoresContent()}
-        </View>
-    );
+    return <View testID="scores">{renderScoresContent()}</View>;
 };
 
 export default Scores;

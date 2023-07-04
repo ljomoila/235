@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
-import { getDateStr } from '../components/ScoresTopbar';
 import { AppContext } from '../context/App/AppContext';
 import { ScoreContext } from '../context/Score/ScoreContext';
+import { formatDate } from '../components/ScoresTopbar';
 
 const useScores = () => {
     const { appState } = useContext(AppContext);
@@ -17,7 +17,7 @@ const useScores = () => {
         setLoading(true);
 
         try {
-            const games = await api.getGames(getDateStr(scoreState.dateIndex));
+            const games = await api.getGames(formatDate(scoreState.date));
             setGames(games);
         } catch (e) {
             console.error(e);

@@ -1,12 +1,12 @@
 import { createContext } from 'react';
 
 export const initialScoreState = {
-  dateIndex: 0,
-  update: true,
-  activePlayer: null
+    date: new Date(),
+    update: false,
+    activePlayer: null // TODO: move player stuff to own context
 };
 
 export const ScoreContext = createContext({
-  scoreState: initialScoreState,
-  dispatch: () => initialScoreState
+    scoreState: initialScoreState,
+    dispatch: () => initialScoreState
 });
