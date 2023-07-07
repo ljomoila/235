@@ -34,3 +34,4 @@ Make sure you have XCode and/or Android Studio is installed on your computer.
 ### Troubleshoot
 
 -   `open -a Simulator` - if simulator is not starting (ios)
+-   `watchman watch-del-all && watchman shutdown-server` - Fixes watchman permission problem

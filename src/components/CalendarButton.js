@@ -8,7 +8,7 @@ export const CalendarButton = () => {
     const [show, setShow] = useState(true);
 
     const onChange = (event, selectedDate) => {
-        dispatch({ ...scoreState, date: selectedDate, update: true });
+        dispatch({ ...scoreState, date: selectedDate, update: selectedDate !== scoreState.date });
     };
 
     const showDatepicker = () => {

@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { RefreshControl, ScrollView, View } from 'react-native';
 import ScoreStatus from '../components/ScoreStatus';
-import { getDateStr } from '../components/ScoresTopbar';
 import ScoreTeam from '../components/ScoreTeam';
 import { TeleText } from '../components/TeleText';
 import { ScoreContext } from '../context/Score/ScoreContext';

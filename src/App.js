@@ -6,8 +6,7 @@ import ScoreContextProvider from './context/Score/ScoreContextProvider';
 import SelectCountry from './views/SelectCountry';
 import { PlayerCard } from './views/PlayerCard';
 import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
-import { useNavigationContainerRef } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { CalendarButton } from './components/CalendarButton';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Stats from './views/Stats';
@@ -33,7 +32,7 @@ const StackNavigator = () => {
             <Stack.Screen name="SelectCountry" component={SelectCountry} />
             <Stack.Screen
                 name="Scores"
-                component={ScoresScreen}
+                component={Scores}
                 options={{
                     headerRight: () => <CalendarButton />,
                     //headerStyle: { backgroundColor: 'black' },
@@ -46,31 +45,12 @@ const StackNavigator = () => {
     );
 };
 
-const ScoresScreen = () => {
-    return (
-        <ScoreContextProvider>
-            <Scores />
-        </ScoreContextProvider>
-    );
-};
-
 const App = () => {
     useSetupApp();
-    // const navigationRef = useNavigationContainerRef();
-
-    // const navTheme = {
-    //     ...DefaultTheme,
-    //     colors: {
-    //         ...DefaultTheme.colors,
-    //         background: '#000'
-    //     }
-    // };
 
     return (
-        // <NavigationContainer ref={navigationRef} theme={navTheme}>
         <NavigationContainer>
             <TabNavigator />
-            {/* <StackNavigator /> */}
         </NavigationContainer>
     );
 };
@@ -78,7 +58,9 @@ const App = () => {
 export default () => {
     return (
         <AppContextProvider>
-            <App />
+            <ScoreContextProvider>
+                <App />
+            </ScoreContextProvider>
         </AppContextProvider>
     );
 };
