@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { DefaultTheme } from '@react-navigation/native';
 
 export const styles = StyleSheet.create({
     container: {
@@ -21,3 +22,31 @@ export const getPlayerStyles = (player, selectedCountry) => {
 
     return { color };
 };
+
+export const navigationTheme = {
+    ...DefaultTheme,
+    colors: {
+        ...DefaultTheme.colors,
+        background: 'black'
+    }
+};
+
+export const tabStyles = {
+    tabBarStyle: {
+        background: 'black',
+        height: 100
+    },
+    tabBarItemStyle: {
+        backgroundColor: 'white',
+        margin: 5,
+        borderRadius: 10
+    }
+};
+
+export const contentStyles = StyleSheet.create({
+    height: '100%',
+    width: '100%',
+    backgroundColor: 'black',
+    color: 'white',
+    margin: 10
+});

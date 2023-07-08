@@ -8,6 +8,7 @@ import useScores from '../hooks/useScores';
 import styles from './Scores.styles';
 import LoadingSpinner from '../components/LoadingSpinner';
 import Notification from '../components/Notification';
+import { contentStyles } from '../App.styles';
 
 const Scores = () => {
     const { scoreState, dispatch } = useContext(ScoreContext);
@@ -42,7 +43,11 @@ const Scores = () => {
         );
     };
 
-    return <View testID="scores">{renderScoresContent()}</View>;
+    return (
+        <View testID="scores" style={contentStyles}>
+            {renderScoresContent()}
+        </View>
+    );
 };
 
 export default Scores;

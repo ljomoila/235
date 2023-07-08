@@ -9,19 +9,21 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { CalendarButton } from './components/CalendarButton';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Stats from './views/Stats';
-
-// import { Logs } from 'expo';
-// Logs.enableExpoCliLogging();
+import Settings from './views/Settings';
+import { navigationTheme, tabStyles } from './App.styles';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
     return (
-        <Tab.Navigator>
-            <Tab.Screen name="Home" component={StackNavigator} />
-            <Tab.Screen name="Stats" component={Stats} />
+        <Tab.Navigator {...{ tabStyles }}>
+            <Tab.Screen
+                name="Home"
+                component={StackNavigator}
+                options={{ headerShown: false, title: '235' }}
+            />
+            <Tab.Screen name="Settings" component={Settings} />
         </Tab.Navigator>
     );
 };
@@ -29,18 +31,22 @@ const TabNavigator = () => {
 const StackNavigator = () => {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="SelectCountry" component={SelectCountry} />
+            <Stack.Screen name="Country" component={SelectCountry} />
             <Stack.Screen
                 name="Scores"
                 component={Scores}
                 options={{
-                    headerRight: () => <CalendarButton />,
-                    //headerStyle: { backgroundColor: 'black' },
-                    contentStyle: { backgroundColor: 'black' }
+                    title: '235',
+                    headerLeft: () => null,
+                    headerRight: () => <CalendarButton />
+                    // headerStyle: { backgroundColor: 'black' },
+                    // headerTitleStyle: {
+                    //     color: '#fff'
+                    // }
                 }}
             />
-            <Stack.Screen name="PlayerCard" component={PlayerCard} />
-            <Stack.Screen name="Stats" component={Stats} />
+            <Stack.Screen name="Player" component={PlayerCard} />
+            <Stack.Screen name="Stats" component={Settings} />
         </Stack.Navigator>
     );
 };
@@ -49,7 +55,7 @@ const App = () => {
     useSetupApp();
 
     return (
-        <NavigationContainer>
+        <NavigationContainer theme={navigationTheme}>
             <TabNavigator />
         </NavigationContainer>
     );

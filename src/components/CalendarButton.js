@@ -21,6 +21,7 @@ export const CalendarButton = () => {
             {show && (
                 <DateTimePicker
                     style={{ marginTop: -30 }}
+                    textColor="white"
                     value={scoreState.date}
                     mode="date"
                     onChange={onChange}
