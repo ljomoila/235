@@ -7,28 +7,29 @@ const ScoreStatus = ({ home, away, timeRemaining, period }) => {
             <TeleText style={styles.scoreItem}>
                 {home.goals}-{away.goals}
             </TeleText>
-            <TeleText style={styles.status}>{timeRemaining} ({period})</TeleText>
+            <TeleText style={styles.status}>{timeRemaining}{"\n"}{period}</TeleText>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     scoreContainer: {
-        flex: 1,
+        flex: 1,            // takes remaining space between the teams
         alignItems: 'center',
-        width: '20%',
-        paddingTop: 5
+        paddingTop: 5,
+        paddingHorizontal: 6,
     },
     scoreItem: {
         fontSize: 14,
         color: '#23ff06',
-        marginBottom: 5
+        marginBottom: 5,
     },
     status: {
         fontSize: 10,
         color: '#fff',
-        textAlign: 'center'
-    }
+        textAlign: 'center',
+        flexShrink: 1,      // allow text to wrap/trim instead of pushing columns
+    },
 });
 
 export default ScoreStatus;

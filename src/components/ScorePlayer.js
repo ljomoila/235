@@ -8,18 +8,18 @@ import { useNavigation } from '@react-navigation/native';
 const ScorePlayer = ({ player, styles }) => {
     const { appState } = useContext(AppContext);
     const { scoreState, dispatch } = useContext(ScoreContext);
-    const { position, lastName, nationality, points } = player;
+    const { position, lastName, nationality, goals, assists } = player;
     const navigation = useNavigation();
 
     styles.color = nationality === appState.selectedCountry ? colors.green : colors.blue;
 
     const renderStats = () => {
         if (position === 'Skater') {
-            return `${lastName} ${points}`;
+            return `${lastName} ${goals}+${assists}`;
         } else if (position === 'Goalie') {
             const { saves, savePercentage, shots } = player;
 
-            return `${lastName} ${saves}/${shots}\n${savePercentage}% ${points ? points : ''}`;
+            return `${lastName} ${saves}/${shots}\n${savePercentage}%`;
         }
     };
 

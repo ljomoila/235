@@ -55,7 +55,7 @@ describe('Scores', () => {
         expect(getAllByText('SCHEDULED').length).toEqual(2);
     });
 
-    it('renders no schduled games when no scores', () => {
+    it('renders no scheduled games when no scores', () => {
         // given
         useScores.mockReturnValue({ loading: false, games: [] });
 

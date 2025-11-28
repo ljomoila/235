@@ -4,23 +4,23 @@
 
 ## Development
 
-Make sure you have XCode and/or Android Studio is installed on your computer.
+Make sure you have XCode and/or Android Studio installed on your computer.
 
 ### Init
 
--   `npm install` - Installs packages
+- `npm install` - Installs packages
 
 ### Start
 
--   `npx expo start` - Runs app in simulator for a chosen platform
+- `npx expo start` - Runs app in simulator for a chosen platform
 
 ### Build
 
--   `expo run:ios/android` - Builds project and runs it in simulator
+- `expo run:ios/android` - Builds project and runs it in simulator
 
 ### Test
 
--   `npm test` - Runs all tests
+- `npm test` - Runs all tests
 
 ### Build to store (Testflight)
 
@@ -33,5 +33,5 @@ Make sure you have XCode and/or Android Studio is installed on your computer.
 
 ### Troubleshoot
 
--   `open -a Simulator` - if simulator is not starting (ios)
--   `watchman watch-del-all && watchman shutdown-server` - Fixes watchman permission problem
+- `open -a Simulator` - if simulator is not starting (ios)
+- `watchman watch-del-all && watchman shutdown-server` - Fixes watchman permission problem

@@ -1,16 +1,21 @@
 // TODO: move to environment variables
 //'https://nhl-service.greensea-4b620c72.westus2.azurecontainerapps.io';
-const API_BASE_URL = 'http://localhost:8080';
+const API_BASE_URL = 'http://localhost:5069';
+const API_KEY_NAME = 'X-API-Key'; // must match server config
+const API_KEY_VALUE = 'changeme'; // set this to your configured value
 
 export default class Api {
     async doFetch(url) {
         try {
-            const response = await fetch(API_BASE_URL + url);
+            const response = await fetch(API_BASE_URL + url, {
+            headers: {
+                [API_KEY_NAME]: API_KEY_VALUE,
+            },
+            });
 
             if (!response.ok) throw new Error('Status not ok');
 
             const responseJson = await response.json();
-
             if (responseJson.error) throw new Error(responseJson.message);
 
             return responseJson;

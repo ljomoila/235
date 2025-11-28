@@ -29,10 +29,10 @@ const Scores = () => {
                 }
             >
                 {games.length ? (
-                    games.map(({ home, away, status }, i) => (
+                    games.map(({ home, away, timeRemaining, period }, i) => (
                         <View key={i} style={styles.game}>
                             <ScoreTeam team={home} homeTeam={true} />
-                            <ScoreStatus home={home} away={away} status={status} />
+                            <ScoreStatus home={home} away={away} timeRemaining={timeRemaining} period={period} />
                             <ScoreTeam team={away} />
                         </View>
                     ))
