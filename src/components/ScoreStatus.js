@@ -1,13 +1,13 @@
 import { StyleSheet, View } from 'react-native';
 import { TeleText } from './TeleText';
 
-const ScoreStatus = ({ home, away, status }) => {
+const ScoreStatus = ({ home, away, timeRemaining, period }) => {
     return (
         <View style={styles.scoreContainer}>
             <TeleText style={styles.scoreItem}>
                 {home.goals}-{away.goals}
             </TeleText>
-            <TeleText style={styles.status}>{status}</TeleText>
+            <TeleText style={styles.status}>{timeRemaining} ({period})</TeleText>
         </View>
     );
 };
