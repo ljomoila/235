@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 export const initialScoreState = {
     date: new Date(),
-    update: false,
+    update: true,
     activePlayer: null // TODO: move player stuff to own context
 };
 

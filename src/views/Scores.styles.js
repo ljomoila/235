@@ -6,7 +6,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         width: '100%',
         paddingBottom: 10,
-        justifyContent: 'space-evenly',
+        justifyContent: 'space-between',
         borderBottomWidth: 1,
         borderBottomColor: '#454547'
     },

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useSetupApp } from './hooks/useSetupApp';
 import Scores from './views/Scores';
 import AppContextProvider from './context/App/AppContextProvider';
@@ -11,6 +11,7 @@ import { CalendarButton } from './components/CalendarButton';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Settings from './views/Settings';
 import { navigationTheme, tabStyles } from './App.styles';
+import { AppContext } from './context/App/AppContext';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -53,6 +54,15 @@ const StackNavigator = () => {
 
 const App = () => {
     useSetupApp();
+    const { appState } = useContext(AppContext);
+    const { api } = appState;
+
+    useEffect(() => {
+        // Preload team rosters in the background so they are warm for scores view
+        api?.getTeamsWithRosters().catch((e) =>
+            console.warn('Prefetch rosters failed', e.message)
+        );
+    }, [api]);
 
     return (
         <NavigationContainer theme={navigationTheme}>

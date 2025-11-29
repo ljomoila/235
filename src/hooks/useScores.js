@@ -7,7 +7,7 @@ const useScores = () => {
     const { appState } = useContext(AppContext);
     const { api } = appState;
     const { scoreState, dispatch } = useContext(ScoreContext);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [games, setGames] = useState([]);
 
@@ -15,6 +15,7 @@ const useScores = () => {
         if (!scoreState.update) return;
 
         setLoading(true);
+        setError(false);
 
         try {
             const games = await api.getGames(formatDate(scoreState.date));

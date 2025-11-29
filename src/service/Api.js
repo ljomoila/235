@@ -28,6 +28,10 @@ export default class Api {
         return await this.doFetch('/teams');
     }
 
+    async getTeamsWithRosters() {
+        return await this.doFetch('/teams/rosters');
+    }
+
     async getTeam(id) {
         return await this.doFetch('/teams/' + id);
     }

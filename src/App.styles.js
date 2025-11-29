@@ -43,10 +43,10 @@ export const tabStyles = {
     }
 };
 
-export const contentStyles = StyleSheet.create({
-    height: '100%',
-    width: '100%',
+export const contentStyles = {
+    flex: 1,
     backgroundColor: 'black',
     color: 'white',
-    margin: 10
-});
+    paddingHorizontal: 10,
+    paddingVertical: 10
+};

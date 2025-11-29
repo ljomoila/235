@@ -14,10 +14,10 @@ const ScoreStatus = ({ home, away, timeRemaining, period }) => {
 
 const styles = StyleSheet.create({
     scoreContainer: {
-        flex: 1,            // takes remaining space between the teams
+        flex: 1,
         alignItems: 'center',
         paddingTop: 5,
-        paddingHorizontal: 6,
+        paddingHorizontal: 6
     },
     scoreItem: {
         fontSize: 14,
@@ -28,8 +28,8 @@ const styles = StyleSheet.create({
         fontSize: 10,
         color: '#fff',
         textAlign: 'center',
-        flexShrink: 1,      // allow text to wrap/trim instead of pushing columns
-    },
+        flexShrink: 1
+    }
 });
 
 export default ScoreStatus;

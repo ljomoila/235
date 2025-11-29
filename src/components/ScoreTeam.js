@@ -20,7 +20,7 @@ const ScoreTeam = ({ team, homeTeam, navigation }) => {
 
 const styles = StyleSheet.create({
     teamContainer: {
-        width: '40%',
+        flex: 2,
         alignSelf: 'stretch',
         paddingTop: 5
     },
